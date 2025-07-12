@@ -1,0 +1,278 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1rem;
+    background-color: #232323;
+}
+.header {
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-shadow:
+    0 0 5px #00f0ff,
+    0 0 10px #00f0ff66,
+    0 0 20px #00f0ff33;
+  letter-spacing: 1px;
+  font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: flickerHeader 3s infinite alternate;
+}
+.graph {
+    width: 60%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 6px #00f0ff22;
+}
+
+.histogram {
+    width: 60%;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 5px #00ffea;
+    box-shadow: 0 0 6px #00f0ff22;
+}
+
+.button {
+  background-color: transparent;
+  border: 2px solid #00f0ff;
+  color: #00f0ff;
+  font-size: 18px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00f0ff;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00f0ff;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Neon hover effect */
+.button:hover:not(:disabled) {
+  box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+  transform: scale(1.05);
+}
+
+/* Animated glowing border (hover) */
+.button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #00f0ff 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.button:hover::before {
+  opacity: 0.4;
+}
+
+/* Pulse when running */
+.button.pulsing {
+  animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* or whatever fits your layout */
+}
+
+.qubit-img {
+  width: 150px;
+  height: auto;
+  animation: spinAround 3s linear infinite, pulseGlow 2s ease-in-out infinite;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 0 10px #00f0ff); /* initial glow */
+}
+
+
+@keyframes spinAround {
+  0% {
+    transform:rotateZ(0deg);
+    }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+/* Pulsing neon glow */
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 5px #00f0ff);
+  }
+  50% {
+    filter: drop-shadow(0 0 25px #00f0ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #00f0ff);
+  }
+}
+/*
+.logs {
+    display: flex;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    color: black;
+}
+.params, .iterations, .bitstring {
+    background-color: #f0f0f0;
+    color: black;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 200px;
+    margin: 0.5rem;
+}
+
+.markdown {
+    background-color: #f0f0f0;
+    color: black;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 600px;
+    margin-top: 1rem;
+}
+*/
+.logs {
+  background-color: #0a0a0f;
+  border: 1px solid #00f0ff33;
+  box-shadow: 0 0 10px #00f0ff55;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  color: #e0f7ff;
+  font-family: "Courier New", monospace;
+}
+
+.wrapper h2 {
+  color: #00f0ff;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 6px #00f0ff88;
+}
+
+.bitstring h3,
+.iterations h3,
+.params h3 {
+  color: #11cdef;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  text-shadow: 0 0 4px #11cdef99;
+}
+
+.bitstring .text-xl,
+.params pre,
+.iterations pre {
+  background-color: #0f0f1f;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #00ffea;
+  overflow-x: auto;
+  box-shadow: 0 0 6px #00f0ff22;
+  margin-bottom: 15px;
+}
+
+.params pre {
+  color: #00ffc3;
+  font-size: 0.85rem;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .logs {
+    padding: 10px;
+  }
+
+  .bitstring .text-xl,
+  .params pre,
+  .iterations pre {
+    font-size: 0.85rem;
+  }
+}
+
+.markdown {
+  background-color: #0a0a0f;
+  color: #e0f7ff;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 1px solid #00f0ff33;
+  box-shadow: 0 0 12px #00f0ff55;
+  font-family: 'Fira Code', monospace;
+  overflow-x: auto;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  color: #00f0ff;
+  text-shadow: 0 0 5px #00f0ff88;
+  margin-top: 20px;
+}
+
+.markdown p {
+  color: #d0faff;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.markdown code {
+  background-color: #111122;
+  color: #00ffc3;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.markdown pre {
+  background-color: #111122;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+  box-shadow: 0 0 8px #00f0ff44;
+  color: #00ffea;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.markdown a {
+  color: #11cdef;
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+

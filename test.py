@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import random
 
 #randomly generated graph and number of wires
-num_wires = random.randint(3, 6)  # Randomly choose number of wires (3 to 10)
+num_wires = 3  # Randomly choose number of wires (3 to 10)
 wires = range(num_wires)
 edges = []
 for i in range(num_wires):
@@ -21,7 +21,7 @@ for i in range(num_wires):
         if random.random() < 0.3:  # 30% probability for extra edge
             edge = (i, j)
             edges.append(edge)
-
+print(f"Generated graph with {num_wires} wires and edges: {edges}")
 graph = nx.Graph()
 graph.add_nodes_from(wires)  # Add all wires as graph nodes
 graph.add_edges_from(edges)
@@ -56,18 +56,25 @@ def cost_function(params):
 # Step 6: Optimize the parameters using a classical optimizer
 opt = qml.AdagradOptimizer(stepsize=0.5)
 
-p = 8  # Number of QAOA layers
+p = 2  # Number of QAOA layers
 init_params = np.array([[0.5, 0.5]] * p, requires_grad=True)  # Initial parameters
 params = init_params
 
-steps = 30
+steps = 20
+tolerance = 0.005  # Set your threshold here
+prev_cost = cost_function(params)
+
 for i in range(steps):
-    params = opt.step(cost_function, params)  # Update parameters
+    params = opt.step(cost_function, params)
+    cost_val = cost_function(params)
     if (i + 1) % 5 == 0:
-        cost_val = cost_function(params)
         print(f"Iteration {i + 1}: Cost = {cost_val:.4f}")
-    if (i == steps - 1):
-        print(f"Final Cost after {steps} iterations: {cost_function(params):.4f}")
+    if abs(cost_val - prev_cost) < tolerance:
+        print(f"Converged at iteration {i + 1}: Cost = {cost_val:.4f}")
+        break
+    prev_cost = cost_val
+else:
+    print(f"Final Cost after {steps} iterations: {cost_val:.4f}")
 
 print("\nOptimized Parameters:")
 print(params)
@@ -97,8 +104,6 @@ most_freq_bitstring = max(counts, key=counts.get)
 print(f"\nMost frequently sampled bitstring: {most_freq_bitstring}")
 print("Sample counts:", counts)
 
-
-
 # Step 8: Visualize the graph with solution coloring
 coloring = [int(bit) for bit in most_freq_bitstring]
 node_colors = ['gold' if bit == 0 else 'lightblue' for bit in coloring]
@@ -118,4 +123,3 @@ plt.title('Sampled Bitstrings from QAOA Circuit')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
-
