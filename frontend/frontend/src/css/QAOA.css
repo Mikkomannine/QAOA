@@ -8,6 +8,12 @@
     gap: 1rem;
     background-color: #232323;
 }
+
+img[alt="QAOA Circuit Diagram"] {
+  display: block;
+  margin: 0 auto;
+  width: 700px;
+}
 .header {
   font-size: 2.5rem;
   color: white;
@@ -222,6 +228,7 @@ pre {
 }
 
 .markdown {
+  max-width: 800px;
   background-color: #0a0a0f;
   color: #e0f7ff;
   padding: 20px;

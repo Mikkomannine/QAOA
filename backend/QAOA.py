@@ -96,7 +96,7 @@ def run_qaoa():
     nx.draw(
         G,
         with_labels=True,
-        node_color=node_colors,  # already gold / lightblue
+        node_color=node_colors,
         edge_color=NEON_ACCENT,
         node_size=800,
         font_size=16,

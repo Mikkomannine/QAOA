@@ -3,6 +3,9 @@ import "./css/QAOA.css";
 import ReactMarkdown from "react-markdown";
 import "highlight.js/styles/github.css";
 import rehypeHighlight from "rehype-highlight";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css"; // Required to style equations
 
 export default function QAOASimulator() {
   const [consoleOutput, setConsoleOutput] = useState("");
@@ -92,6 +95,8 @@ export default function QAOASimulator() {
           className="histogram"
         />
       )}
+      {(consoleOutput || bestBitstring || iterations.length > 0 || optimizedParams.length > 0) && (
+        
       <div className="logs">
         <div className="wrapper">
           <h2 className="text-2xl font-bold">{consoleOutput}</h2>
@@ -115,8 +120,11 @@ export default function QAOASimulator() {
         </div>
       )}
       </div>
+      )}
       <div className="markdown">
-        <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+        <ReactMarkdown
+          remarkPlugins={[remarkMath]}
+          rehypePlugins={[rehypeKatex, rehypeHighlight]}>
           {markdownContent}
         </ReactMarkdown>
         </div>
