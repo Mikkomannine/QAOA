@@ -58,6 +58,7 @@ img[alt="QAOA Circuit Diagram"] {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  margin-top: 20px;
 }
 
 .button:disabled {

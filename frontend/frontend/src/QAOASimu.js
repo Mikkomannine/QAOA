@@ -16,6 +16,7 @@ export default function QAOASimulator() {
   const [bestBitstring, setBestBitstring] = useState("");
   const [loading, setLoading] = useState(false);
   const [markdownContent, setMarkdownContent] = useState("");
+  const [intro, setIntro] = useState("");
 
   const runQAOA = async () => {
     setLoading(true);
@@ -60,10 +61,24 @@ export default function QAOASimulator() {
     fetchMarkdown();
   }, []);
 
+    useEffect(() => {
+    fetch("/intro.md")
+      .then((res) => res.text())
+      .then(setIntro)
+      .catch((err) => console.error("Failed to load markdown:", err));
+  }, []);
+
 
   return (
     <div className="container">
       <h1 className="header">QAOA for MaxCut</h1>
+      <div className="markdown">
+        <ReactMarkdown
+          remarkPlugins={[remarkMath]}
+          rehypePlugins={[rehypeKatex, rehypeHighlight]}>
+          {intro}
+        </ReactMarkdown>
+      </div>
       <button
       onClick={runQAOA}
       disabled={loading}

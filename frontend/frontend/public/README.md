@@ -1,8 +1,5 @@
 
 # QAOA for MaxCut – Code Walkthrough
-
-This document explains the implementation of the Quantum Approximate Optimization Algorithm (QAOA) for solving the MaxCut problem using PennyLane. The explanation follows the structure of the code, with concise descriptions and relevant mathematical background.
-
 ---
 
 ## 1. Graph Generation
@@ -106,7 +103,7 @@ $$
 
 The system begins in an equal superposition over all bitstrings.
 
-The core quantum state prepared by QAOA is defined as:
+The quantum state prepared by QAOA is defined as:
 $$
 |\psi(\boldsymbol{\gamma}, \boldsymbol{\alpha})\rangle = \prod_{k=1}^{p} e^{-i \alpha_k H_M} e^{-i \gamma_k H_C} |+\rangle^{\otimes n}
 $$
