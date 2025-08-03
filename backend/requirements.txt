@@ -1,0 +1,10 @@
+Flask
+waitress
+matplotlib
+networkx
+pennylane
+flask-cors
+base64
+io
+numpy
+json
