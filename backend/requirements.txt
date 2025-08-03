@@ -4,6 +4,3 @@ matplotlib
 networkx
 pennylane
 flask-cors
-io
-numpy
-json
