@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -12,6 +13,7 @@ plt.style.use('dark_background')
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/api/qaoa', methods=['POST'])
 def run_qaoa():
@@ -163,4 +165,4 @@ def run_qaoa():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
