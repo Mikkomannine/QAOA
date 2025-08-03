@@ -44,7 +44,7 @@ These **cut edges** are:
 - (3,4)
 - (0,4)
 
-There are **5 edges crossing the cut**, which means the **maximum cut value is 5**.
+There are 5 edges crossing the cut, giving a cut value of 5. A bitstring that produces this cut is 10110 (or equivalently, 01001, since the partition is symmetric)
 
 This illustrates what the MaxCut problem is all about: **finding the best way to separate the graph into two groups** so that the number of crossing edges is maximized.
 

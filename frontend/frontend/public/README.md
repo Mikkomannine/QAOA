@@ -23,7 +23,7 @@ graph = nx.Graph()
 graph.add_nodes_from(wires)
 graph.add_edges_from(edges)
 ```
-A graph with 3 to 6 nodes is randomly generated. Each node is connected to at least one other node, and additional edges are added probabilistically.
+A graph with 3 to 6 nodes is randomly generated. Each node is connected to at least one other node, and additional edges are added probabilistically. Variable **num_wires** is the number of qubits that each represent a node. 
 
 The **MaxCut problem** aims to partition the nodes into two sets such that the number of edges between the sets is maximized.
 
@@ -121,13 +121,15 @@ Where:
 
 ---
 
+
 ## 5. Cost Function and Optimization
 
 ```python
 opt = qml.AdagradOptimizer(stepsize=0.5)
 params = np.array([[0.5, 0.5]] * p, requires_grad=True)
 ```
-The classical **Adagrad optimizer** is used to minimize the expected cost:
+The classical **Adagrad optimizer** is used to minimize the expected cost of the quantum circuit. The cost function is defined as the **expectation value of the cost Hamiltonian** $$H_C$$ with respect to the current quantum state $$|\psi(\gamma, \alpha)
+\rangle$$:
 
 ```python
 @qml.qnode(dev)
@@ -141,17 +143,68 @@ $$
 \langle \psi(\gamma, \alpha) | H_C | \psi(\gamma, \alpha) \rangle
 $$
 
-Where $$|\psi(\gamma, \alpha)\rangle$$ is the state after applying $$p$$ layers.
+Where $$|\psi(\gamma, \alpha)\rangle$$ is the quantum state produced after applying $$p$$ layers with given parameters.
+
+---
+### How the Optimizer Works
+
+The optimization loop in QAOA combines quantum circuit evaluation with classical gradient-based updates. Here's a breakdown:
+
+---
+
+#### Estimate Gradient (Parameter-Shift Rule)
+
+Since we can't directly compute gradients on a quantum circuit, we use the **parameter-shift rule**:
+
+![Parameter Shift Rule](images/PSR.png)
+
+- $$\mathcal{L}(\theta)$$ The loss function (cost hamiltonian)
+- $$\theta$$ A variational parameter
+
+---
+
+#### Apply Optimizer Update (Adagrad)
+
+Adagrad is an adaptive optimization algorithm that adjusts the learning rate individually for each parameter based on the accumulated history of its squared gradients, enabling more stable and efficient convergence. The parameter update rule is:
+
+$$
+\theta_i^{(t+1)} = \theta_i^{(t)} - \frac{\eta}{\sqrt{G_i^{(t)} + \epsilon}} \cdot g_i^{(t)}
+$$
+
+- $$G_i^{(t)}$$: gradient at step $$t$$
+- $$G_i^{(t)}$$: accumulated squared gradients
+- $$\eta$$: learning rate
+- $$\epsilon$$: small constant for stability
+
+This helps reduce the step size for frequently updated parameters, making learning more stable and adaptive.
+
+---
+
+#### Repeat
+
+QAOA repeats the process:
+- Estimates new cost
+- Calculates gradients
+- Updates parameters
+
+This hybrid loop continues until the cost converges or a set number of iterations are complete.
 
 ---
 
 ## 6. Optimization Loop
 
 ```python
-steps = 30
-for i in range(steps):
-    params = opt.step(cost_function, params)
-    cost_val = cost_function(params)
+    steps = 50
+    tolerance = 0.005
+    prev_cost = cost_function(params)
+    iteration_logs = []
+
+    for i in range(steps):
+        params = opt.step(cost_function, params)
+        cost_val = cost_function(params)
+        if abs(cost_val - prev_cost) < tolerance:
+            break
+        prev_cost = cost_val
 ```
 The optimizer updates the parameters $$\gamma_k, \alpha_k$$ for each layer to find the minimum expectation value of the cost hamiltonian.
 

@@ -101,7 +101,7 @@ img[alt="QAOA Circuit Diagram"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px; /* or whatever fits your layout */
+  height: 300px;
 }
 
 .qubit-img {
@@ -109,7 +109,7 @@ img[alt="QAOA Circuit Diagram"] {
   height: auto;
   animation: spinAround 3s linear infinite, pulseGlow 2s ease-in-out infinite;
   transform-style: preserve-3d;
-  filter: drop-shadow(0 0 10px #00f0ff); /* initial glow */
+  filter: drop-shadow(0 0 10px #00f0ff);
 }
 
 
@@ -134,38 +134,7 @@ img[alt="QAOA Circuit Diagram"] {
     filter: drop-shadow(0 0 5px #00f0ff);
   }
 }
-/*
-.logs {
-    display: flex;
-    background-color: white;
-    border-radius: 0.5rem;
-}
 
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    color: black;
-}
-.params, .iterations, .bitstring {
-    background-color: #f0f0f0;
-    color: black;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    max-width: 200px;
-    margin: 0.5rem;
-}
-
-.markdown {
-    background-color: #f0f0f0;
-    color: black;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    max-width: 600px;
-    margin-top: 1rem;
-}
-*/
 .logs {
   background-color: #0a0a0f;
   border: 1px solid #00f0ff33;
@@ -229,7 +198,7 @@ pre {
 }
 
 .markdown {
-  max-width: 800px;
+  max-width: 100%;
   background-color: #0a0a0f;
   color: #e0f7ff;
   padding: 20px;
@@ -273,6 +242,12 @@ pre {
   color: #00ffea;
   margin-bottom: 20px;
   font-size: 0.9rem;
+}
+.markdown img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .markdown a {

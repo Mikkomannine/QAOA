@@ -5,7 +5,7 @@ import "highlight.js/styles/github.css";
 import rehypeHighlight from "rehype-highlight";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css"; // Required to style equations
+import "katex/dist/katex.min.css";
 
 export default function QAOASimulator() {
   const [consoleOutput, setConsoleOutput] = useState("");
@@ -146,56 +146,3 @@ export default function QAOASimulator() {
     </div>
   );
 }
-
-/*
-export default function QAOASimulator() {
-  const [image1, setImage1] = useState(null);
-  const [image2, setImage2] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const runQAOA = async () => {
-    setLoading(true);
-    setImage1(null);
-    setImage2(null);
-    try {
-      const response = await fetch("/api/qaoa", {
-        method: "POST",
-      });
-      const data = await response.json();
-      setImage1(`data:image/png;base64,${data.graph}`);
-      setImage2(`data:image/png;base64,${data.hist}`);
-    } catch (err) {
-      console.error("Error running QAOA:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="p-6 flex flex-col items-center gap-6">
-      <button
-  onClick={runQAOA}
-  disabled={loading}
-  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
->
-  {loading ? "Running..." : "Run QAOA"}
-</button>
-
-      {image1 && (
-        <img
-          src={image1}
-          alt="Graph Partition"
-          className="rounded-xl shadow-lg max-w-2xl"
-        />
-      )}
-      {image2 && (
-        <img
-          src={image2}
-          alt="Bitstring Histogram"
-          className="rounded-xl shadow-lg max-w-2xl"
-        />
-      )}
-    </div>
-  );
-}
-*/
