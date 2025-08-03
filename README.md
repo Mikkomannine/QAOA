@@ -28,7 +28,7 @@ This problem is known to be **NP-hard**, meaning it becomes very difficult to so
 
 Let's consider the graph shown below:
 
-![MaxCut Example](images/maxcut_example.png)
+![MaxCut Example](/frontend/frontend/public/images/maxcut_example.png)
 
 In this example:
 
