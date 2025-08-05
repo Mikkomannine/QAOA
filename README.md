@@ -58,7 +58,7 @@ Code Walkthrough
 ## 1. Graph Generation
 
 ```python
-num_wires = random.randint(3, 6)
+num_wires = random.randint(3, 5)
 wires = range(num_wires)
 edges = []
 
@@ -76,7 +76,7 @@ graph = nx.Graph()
 graph.add_nodes_from(wires)
 graph.add_edges_from(edges)
 ```
-A graph with 3 to 6 nodes is randomly generated. Each node is connected to at least one other node, and additional edges are added probabilistically. Variable **num_wires** is the number of qubits that each represent a node. 
+A graph with 3 to 5 nodes is randomly generated. Each node is connected to at least one other node, and additional edges are added probabilistically. Variable **num_wires** is the number of qubits that each represent a node. 
 
 The **MaxCut problem** aims to partition the nodes into two sets such that the number of edges between the sets is maximized.
 
@@ -178,6 +178,7 @@ Where:
 ## 5. Cost Function and Optimization
 
 ```python
+p = 5
 opt = qml.AdagradOptimizer(stepsize=0.5)
 params = np.array([[0.5, 0.5]] * p, requires_grad=True)
 ```
