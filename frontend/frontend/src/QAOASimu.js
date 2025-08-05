@@ -6,6 +6,11 @@ import rehypeHighlight from "rehype-highlight";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
+import dotenv from "dotenv";
+dotenv.config();
+
+
+const API_URL = process.env.QAOA_API_URL;
 
 export default function QAOASimulator() {
   const [consoleOutput, setConsoleOutput] = useState("");
@@ -28,7 +33,7 @@ export default function QAOASimulator() {
     setConsoleOutput("");
 
     try {
-      const response = await fetch("/api/qaoa", {
+      const response = await fetch(`${API_URL}/api/qaoa`, {
         method: "POST",
       });
       const data = await response.json();
