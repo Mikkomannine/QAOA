@@ -7,9 +7,6 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 
-
-const API_URL = process.env.REACT_APP_API_BASE;
-
 export default function QAOASimulator() {
   const [consoleOutput, setConsoleOutput] = useState("");
   const [image1, setImage1] = useState(null);
