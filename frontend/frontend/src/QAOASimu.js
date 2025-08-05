@@ -33,6 +33,10 @@ export default function QAOASimulator() {
     try {
       const response = await fetch(`${API_URL}/api/qaoa`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: "{}",
       });
       const data = await response.json();
       setImage1(`data:image/png;base64,${data.graph}`);

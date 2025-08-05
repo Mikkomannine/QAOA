@@ -125,6 +125,7 @@ Where:
 ## 5. Cost Function and Optimization
 
 ```python
+p = 5
 opt = qml.AdagradOptimizer(stepsize=0.5)
 params = np.array([[0.5, 0.5]] * p, requires_grad=True)
 ```
