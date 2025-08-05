@@ -31,7 +31,7 @@ export default function QAOASimulator() {
     setConsoleOutput("");
 
     try {
-      const response = await fetch(`${API_URL}/api/qaoa`, {
+      const response = await fetch(`https://qaoa.onrender.com/api/qaoa`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
