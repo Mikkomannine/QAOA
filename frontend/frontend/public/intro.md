@@ -52,6 +52,6 @@ This illustrates what the MaxCut problem is all about: **finding the best way to
 
 Now we will show how the **QAOA** can be used to find such a partition using quantum circuits and classical optimization.
 
-To proceed, click "Run QAOA" to execute the algorithm and observe its performance on a randomly generated graph.
+To proceed, click "Run QAOA" to execute the algorithm and observe its performance on a randomly generated graph. This may take up to 3 minutes due to limited server resources.
 
 

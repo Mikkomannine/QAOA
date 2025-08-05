@@ -6,11 +6,9 @@ import rehypeHighlight from "rehype-highlight";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
-import dotenv from "dotenv";
-dotenv.config();
 
 
-const API_URL = process.env.QAOA_API_URL;
+const API_URL = process.env.REACT_APP_API_BASE;
 
 export default function QAOASimulator() {
   const [consoleOutput, setConsoleOutput] = useState("");

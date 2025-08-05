@@ -114,6 +114,7 @@ def run_qaoa():
     G.add_nodes_from(wires)
     G.add_edges_from(edges)
 
+    # Draw the graph with node colors based on the solution
     plt.style.use("dark_background")
     plt.figure(figsize=(5, 5))
     nx.draw(
@@ -128,11 +129,12 @@ def run_qaoa():
     plt.title("Graph Partitioned by QAOA (MaxCut)", color=NEON_ACCENT)
 
     buf1 = io.BytesIO()
-    plt.savefig(buf1, format='png')
+    plt.savefig(buf1, format='png', facecolor='black')
     buf1.seek(0)
     graph_img = base64.b64encode(buf1.read()).decode('utf-8')
     plt.close()
 
+    # Create a histogram of the most frequently sampled bitstrings
     plt.figure(figsize=(max(len(top_counts) * 0.4, 4), 4))
     plt.bar(
         top_counts.keys(),
@@ -154,6 +156,7 @@ def run_qaoa():
     hist_img = base64.b64encode(buf2.read()).decode('utf-8')
     plt.close()
 
+    # Prepare the console output
     console_output = "Console Output:"
     return jsonify({
         "graph": graph_img,
