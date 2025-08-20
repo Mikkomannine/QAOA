@@ -1,4 +1,5 @@
 Flask
+gunicorn==22.0.0
 waitress
 matplotlib
 networkx
