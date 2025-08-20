@@ -16,7 +16,11 @@ plt.style.use('dark_background')
 
 app = Flask(__name__)
 CORS(app, resources={
-  r"/api/*": {"origins": ["https://qaoa-maxcut.onrender.com"]}
+  r"/api/*": {"origins": [
+    "http://localhost:3000",
+    "https://qaoa-maxcut.onrender.com",
+    "https://qaoa.onrender.com"
+  ]}
 })
 
 

@@ -48,7 +48,7 @@ export default function QAOASimulator() {
 
       const data = await response.json();
 
-      //URL-based images returned by the backend
+      // Prefer URL-based images and fetch them as blobs for reliability
       if (data.graph_url && data.hist_url) {
         const graphUrl =
           data.graph_url.startsWith("http")
@@ -59,17 +59,29 @@ export default function QAOASimulator() {
             ? data.hist_url
             : `${API_BASE}${data.hist_url}`;
 
-        // Setting key forces React to replace <img> nodes between runs
-        setImage1(graphUrl);
-        setImage2(histUrl);
-      } else if (data.graph && data.hist) {
+        // Fetch the image bytes (avoid stale caches)
+        const [gRes, hRes] = await Promise.all([
+          fetch(graphUrl, { cache: "no-store" }),
+          fetch(histUrl, { cache: "no-store" }),
+        ]);
+        if (!gRes.ok || !hRes.ok) {
+          throw new Error(`Image fetch failed: ${gRes.status}/${hRes.status}`);
+        }
 
+        const [gBlob, hBlob] = await Promise.all([gRes.blob(), hRes.blob()]);
+        const gObjUrl = URL.createObjectURL(gBlob);
+        const hObjUrl = URL.createObjectURL(hBlob);
+
+        setImage1(gObjUrl);
+        setImage2(hObjUrl);
+      } else if (data.graph && data.hist) {
         // Backward-compat (if server still returns base64)
         setImage1(`data:image/png;base64,${data.graph}`);
         setImage2(`data:image/png;base64,${data.hist}`);
       } else {
         throw new Error("API did not return image URLs or base64 data");
       }
+
 
       setIterations(Array.isArray(data.iterations) ? data.iterations : []);
       setOptimizedParams(
@@ -108,6 +120,14 @@ export default function QAOASimulator() {
       .then(setIntro)
       .catch((err) => console.error("Failed to load markdown:", err));
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (image1?.startsWith("blob:")) URL.revokeObjectURL(image1);
+      if (image2?.startsWith("blob:")) URL.revokeObjectURL(image2);
+    };
+  }, [image1, image2]);
+
 
   return (
     <div className="container">
