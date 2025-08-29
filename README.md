@@ -209,11 +209,7 @@ The optimization loop in QAOA combines quantum circuit evaluation with classical
 #### Estimate Gradient (Parameter-Shift Rule)
 
 Since we can't directly compute gradients on a quantum circuit, we use the **parameter-shift rule**:
-$$
-\frac{\partial \mathcal{L}(\theta)}{\partial \theta} \approx \frac{1}{2} \left[
-\mathcal{L}(\theta + \frac{\pi}{2}) - \mathcal{L}(\theta - \frac{\pi}{2})
-\right]
-$$
+![QAOA Circuit Diagram](/frontend/frontend/public/images/PSR.png)
 - $$\mathcal{L}(\theta)$$ The loss function (cost hamiltonian)
 - $$\theta$$ A variational parameter
 
