@@ -146,7 +146,7 @@ These layers are applied $$p$$ times (depth of the algorithm).
         for gamma, alpha in params:
             qaoa_layer(gamma, alpha)
 ```
-![QAOA Circuit Diagram](images/circuit.png)
+![QAOA Circuit Diagram](/frontend/frontend/public/images/circuit.png)
 
 Applies Hadamard gates to all qubits to prepare the initial state:
 
