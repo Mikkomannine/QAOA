@@ -1,5 +1,7 @@
 # QAOA for Maxcut
 
+Live Demo: [https://qaoa-maxcut.onrender.com/](https://qaoa-maxcut.onrender.com/)
+
 # What is QAOA?
 
 The Quantum Approximate Optimization Algorithm (QAOA) is a hybrid quantum-classical algorithm designed to solve combinatorial optimization problems such as MaxCut.
@@ -28,7 +30,7 @@ This problem is known to be **NP-hard**, meaning it becomes very difficult to so
 
 Let's consider the graph shown below:
 
-![MaxCut Example](/frontend/frontend/public/images/maxcut_example.png)
+![MaxCut Example](/frontend/public/images/maxcut_example.png)
 
 In this example:
 
