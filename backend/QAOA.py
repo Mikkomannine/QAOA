@@ -9,7 +9,7 @@ import pennylane as qml
 from pennylane import numpy as np
 import random, io, base64, os
 from uuid import uuid4
-from PIL import Image  # NEW
+from PIL import Image
 import tempfile
 from pathlib import Path
 plt.style.use('dark_background')
@@ -24,7 +24,7 @@ CORS(app, resources={
 })
 
 
-# Cross-platform temp dir (works on Windows, Linux, macOS)
+# Cross-platform temp dir for storing images
 TMP_DIR = Path(tempfile.gettempdir()) / "qaoa_images"
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 

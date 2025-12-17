@@ -29,7 +29,6 @@ export default function QAOASimulator() {
     setBestBitstring("");
     setConsoleOutput("");
 
-    // Abort if the network is stuck (helps mobile)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 180000);
 
@@ -48,7 +47,6 @@ export default function QAOASimulator() {
 
       const data = await response.json();
 
-      // Prefer URL-based images and fetch them as blobs for reliability
       if (data.graph_url && data.hist_url) {
         const graphUrl =
           data.graph_url.startsWith("http")
@@ -59,7 +57,6 @@ export default function QAOASimulator() {
             ? data.hist_url
             : `${API_BASE}${data.hist_url}`;
 
-        // Fetch the image bytes (avoid stale caches)
         const [gRes, hRes] = await Promise.all([
           fetch(graphUrl, { cache: "no-store" }),
           fetch(histUrl, { cache: "no-store" }),
@@ -75,7 +72,6 @@ export default function QAOASimulator() {
         setImage1(gObjUrl);
         setImage2(hObjUrl);
       } else if (data.graph && data.hist) {
-        // Backward-compat (if server still returns base64)
         setImage1(`data:image/png;base64,${data.graph}`);
         setImage2(`data:image/png;base64,${data.hist}`);
       } else {
